@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/commons::head"></head>
+<body>
+<header xmlns:h="http://xmlns.jcp.org/jsf/html"
+        th:replace="fragments/commons::navigation">
+</header>
+<main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Product</span></h1>
+    <hr class="hr-3"/>
+    <form th:action="@{/product/add}"
+          th:method="POST"
+          th:object="${productAddBindingModel}"
+          class="mx-auto w-25 bg-blur">
+
+        <small th:if="${ProductExist == true}" class="text-center text-light form-text bg-danger rounded">
+            Product already exists</small>
+
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="name" class="h4 mb-2">Name</label>
+            </div>
+            <input th:field="*{name}"
+                   th:errorclass="is-invalid"
+                   type="text" class="form-control" id="name" name="name"/>
+            <small class="invalid-feedback bg-danger text-light rounded">
+                Name length must be more than 2 characters.</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="description" class="h4 mb-2">Description</label>
+            </div>
+            <input th:field="*{description}"
+                   th:errorclass="is-invalid"
+                   type="text" class="form-control" id="description" name="description"/>
+            <small class="invalid-feedback bg-danger text-light rounded">
+                Description length must be more than 2 characters.</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="category" class="h4 mb-2">Category</label>
+            </div>
+            <select th:field="*{category}"
+                    th:errorclass="is-invalid"
+                    class="form-control"
+                    styleClass="browser-default custom-select" id="category">
+                <option value="">-- SELECT CATEGORY --</option>
+                <option th:each="c : ${T(com.example.andrey_s.model.entity.enums.CategoryNameEnum).values()}"
+                        th:value="${c}"
+                        th:text="${c}"
+                        th:selected="${c} == *{category}"
+                ></option>
+            </select>
+            <small th:if="${#fields.hasErrors('category')}"
+                   th:errors="*{category}"
+                   class="invalid-feedback text-danger">
+                Category error message</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="sex" class="h4 mb-2">Sex</label>
+            </div>
+            <select th:field="*{sex}"
+                    th:errorclass="bg-danger"
+                    styleClass="browser-default custom-select" id="sex">
+                <option value="">-- SELECT GENDER --</option>
+                <option th:each="g : ${T(com.example.andrey_s.model.entity.enums.GenderEnum).values()}"
+                        th:value="${g}"
+                        th:text="${g}"
+                        th:selected="${g} == *{sex}"
+                ></option>
+            </select>
+            <small th:if="${#fields.hasErrors('sex')}"
+                   th:errors="*{sex}"
+                   class="invalid-feedback text-danger">
+                Gender error message</small>
+        </div>
+        <div class="form-group">
+            <div class="text-white label-holder d-flex justify-content-center">
+                <label for="price" class="h4 mb-2">Price</label>
+            </div>
+            <input th:field="*{price}"
+                   th:errorclass="is-invalid"
+                   type="number" class="form-control" id="price" name="price"/>
+            <small class="invalid-feedback bg-danger text-light rounded">
+                Price must be positive number!</small>
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-secondary text-white mb-3">Add Product</button>
+        </div>
+    </form>
+</main>
+<footer th:replace="fragments/commons::footer"></footer>
+</body>
+</html>
