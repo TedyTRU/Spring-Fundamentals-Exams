@@ -37,7 +37,7 @@ public class DBInit implements CommandLineRunner {
             User admin = new User();
             admin
                     .setActive(true)
-                    .setUsername("admin")
+                    .setEmail("admin")
                     .setFirstName("Admin")
                     .setLastName("Adminov")
                     .setPassword(passwordEncoder.encode("123"))
