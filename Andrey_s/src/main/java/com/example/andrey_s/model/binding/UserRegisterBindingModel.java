@@ -1,8 +1,16 @@
 package com.example.andrey_s.model.binding;
 
+import com.example.andrey_s.model.validation.FieldMatch;
+import com.example.andrey_s.model.validation.UniqueUserEmail;
+
 import javax.validation.constraints.*;
 import java.math.BigDecimal;
 
+@FieldMatch(
+        first = "password",
+        second = "confirmPassword",
+        message = "Passwords do not match!"
+)
 public class UserRegisterBindingModel {
 
     private String username;
@@ -24,8 +32,9 @@ public class UserRegisterBindingModel {
         return this;
     }
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "User email should be provided.")
+    @Email(message = "User email should be valid.")
+    @UniqueUserEmail(message = "User email should be unique.")
     public String getEmail() {
         return email;
     }

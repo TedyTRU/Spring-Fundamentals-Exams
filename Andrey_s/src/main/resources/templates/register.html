@@ -12,14 +12,6 @@
           th:object="${userRegisterBindingModel}"
           class="mx-auto w-25 bg-blur">
 
-        <th:block th:if="${UserError}">
-            <small class="text-center text-light form-text bg-danger rounded">Passwords does not match!</small>
-        </th:block>
-
-        <th:block th:if="${UserNameIsOccupied}">
-            <small class="text-center text-light form-text bg-danger rounded">Username is occupied</small>
-        </th:block>
-
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="username" class="h4 mb-2 text-white">Username</label>
@@ -40,8 +32,10 @@
             <input th:field="*{email}"
                    th:errorclass="is-invalid"
                    type="email" class="form-control" id="email" name="email"/>
-            <small class="invalid-feedback bg-danger text-light rounded">
-                Email must be valid.</small>
+            <small class="invalid-feedback bg-danger text-light rounded"
+                   th:each="err : ${#fields.errors('email')}"
+                   th:text="${err}">
+            </small>
         </div>
 
         <div class="form-group">
@@ -72,8 +66,10 @@
             <input th:field="*{confirmPassword}"
                    th:errorclass="is-invalid"
                    type="password" class="form-control" id="confirmPassword" name="confirmPassword"/>
-            <small class="invalid-feedback bg-danger text-light rounded">
-                Password length must be more than 2 characters.</small>
+            <small class="invalid-feedback bg-danger text-light rounded"
+                   th:each="err : ${#fields.errors('confirmPassword')}"
+                   th:text="${err}">>
+            </small>
         </div>
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" class="btn btn-secondary text-white mb-3" value="Register">Register</button>

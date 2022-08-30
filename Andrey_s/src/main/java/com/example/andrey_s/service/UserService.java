@@ -5,7 +5,7 @@ import com.example.andrey_s.model.service.UserServiceRegisterModel;
 
 public interface UserService {
 
-    boolean registerUser(UserServiceRegisterModel userServiceRegisterModel);
+    void registerUser(UserServiceRegisterModel userServiceRegisterModel);
 
     UserServiceLoginModel findUserByNameAndPassword(String username, String password);
 
