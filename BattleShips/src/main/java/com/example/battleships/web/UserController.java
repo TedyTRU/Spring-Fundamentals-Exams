@@ -49,24 +49,16 @@ public class UserController {
                                   BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
 
-        if (bindingResult.hasErrors() || !userRegisterBindingModel.getPassword().equals(userRegisterBindingModel.getConfirmPassword())) {
+        if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBindingModel", bindingResult);
-            redirectAttributes.addFlashAttribute("UserError", true);
 
             return "redirect:register";
         }
 
         // save in DB
         UserRegisterServiceModel userRegisterServiceModel = modelMapper.map(userRegisterBindingModel, UserRegisterServiceModel.class);
-        boolean success = userService.registerUser(userRegisterServiceModel);
-
-        if (!success) {
-            redirectAttributes.addFlashAttribute("userRegisterBindingModel", userRegisterBindingModel);
-            redirectAttributes.addFlashAttribute("UserIsOccupied", true);
-
-            return "redirect:register";
-        }
+        userService.registerUser(userRegisterServiceModel);
 
         return "redirect:login";
     }

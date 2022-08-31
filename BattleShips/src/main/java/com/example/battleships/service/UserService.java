@@ -6,7 +6,7 @@ import com.example.battleships.model.service.UserRegisterServiceModel;
 
 public interface UserService {
 
-    boolean registerUser(UserRegisterServiceModel userRegisterServiceModel);
+    void registerUser(UserRegisterServiceModel userRegisterServiceModel);
 
     UserLoginServiceModel findUserByUsernameAndPassword(String username, String password);
 
