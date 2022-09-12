@@ -1,9 +1,7 @@
 package bg.softuni.mobilelele.model.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -15,7 +13,7 @@ public class User extends BaseEntity {
     private String lastName;
     private Boolean isActive;
     private String imageUrl;
-    private UserRole role;
+    private List<UserRole> role;
 
     public User() {
     }
@@ -73,12 +71,13 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @OneToOne
-    public UserRole getRole() {
+    @OneToMany
+    public List<UserRole> getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public User setRole(List<UserRole> role) {
         this.role = role;
+        return this;
     }
 }
