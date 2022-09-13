@@ -71,7 +71,7 @@ public class User extends BaseEntity {
         this.imageUrl = imageUrl;
     }
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<UserRole> getRole() {
         return role;
     }

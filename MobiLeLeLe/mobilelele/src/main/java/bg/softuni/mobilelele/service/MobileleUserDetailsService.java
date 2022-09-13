@@ -1,8 +1,9 @@
 package bg.softuni.mobilelele.service;
 
+import bg.softuni.mobilelele.model.entity.User;
 import bg.softuni.mobilelele.model.entity.UserRole;
 import bg.softuni.mobilelele.repository.UserRepository;
-import bg.softuni.mobilelele.user.MobileleUserDetails;
+import bg.softuni.mobilelele.model.user.MobileleUserDetails;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +28,7 @@ public class MobileleUserDetailsService implements UserDetailsService {
 
     }
 
-    private UserDetails map(bg.softuni.mobilelele.model.entity.User user) {
+    private UserDetails map(User user) {
 
         return new MobileleUserDetails(
                 user.getPassword(),

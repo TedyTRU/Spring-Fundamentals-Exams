@@ -37,7 +37,10 @@ public class SecurityConfig {
                 .failureForwardUrl("/users/login-error")
         .and()
                 .logout()
+                // which is the logout url, must be POST request
                 .logoutUrl("/users/logout")
+                // on logout go to the home page
+                .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID");
 

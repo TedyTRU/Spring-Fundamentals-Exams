@@ -1,4 +1,4 @@
-package bg.softuni.mobilelele.user;
+package bg.softuni.mobilelele.model.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +31,24 @@ public class MobileleUserDetails implements UserDetails {
 
     public String getLastName() {
         return this.lastName;
+    }
+
+    public String getFullName() {
+
+        StringBuilder fullName = new StringBuilder();
+
+        if (getFirstName() != null) {
+            fullName.append(getFirstName());
+        }
+
+        if (getLastName() != null) {
+            if (!fullName.isEmpty()) {
+                fullName.append(" ");
+            }
+            fullName.append(getLastName());
+        }
+
+        return fullName.toString();
     }
 
     @Override
