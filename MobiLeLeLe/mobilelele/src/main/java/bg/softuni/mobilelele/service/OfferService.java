@@ -3,10 +3,12 @@ package bg.softuni.mobilelele.service;
 import bg.softuni.mobilelele.model.dto.AddOfferDto;
 import bg.softuni.mobilelele.model.entity.Model;
 import bg.softuni.mobilelele.model.entity.Offer;
+import bg.softuni.mobilelele.model.entity.User;
 import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repository.ModelRepository;
 import bg.softuni.mobilelele.repository.OfferRepository;
 import bg.softuni.mobilelele.repository.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,23 +26,23 @@ public class OfferService {
         this.modelRepository = modelRepository;
     }
 
-    public void adOffer(AddOfferDto addOfferDto) {
+    public void adOffer(AddOfferDto addOfferDto, UserDetails userDetails) {
 
         Offer newOffer = offerMapper
                 .addOfferDtoToOfferEntity(addOfferDto);
 
         // TODO - current user should be logged in
 
-//        User seller = userRepository
-//                .findByEmail(currentUser.getEmail())
-//                .orElseThrow();
+        User seller = userRepository
+                .findByEmail(userDetails.getUsername())
+                .orElseThrow();
 
         Model model = modelRepository
                 .findById(addOfferDto.getModelId())
                 .orElseThrow();
 
         newOffer.setModel(model);
-//        newOffer.setSeller(seller);
+        newOffer.setSeller(seller);
 
         offerRepository.save(newOffer);
     }

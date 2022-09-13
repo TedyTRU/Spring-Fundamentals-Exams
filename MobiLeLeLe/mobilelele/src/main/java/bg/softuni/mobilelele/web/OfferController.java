@@ -4,6 +4,8 @@ package bg.softuni.mobilelele.web;
 import bg.softuni.mobilelele.model.dto.AddOfferDto;
 import bg.softuni.mobilelele.service.BrandService;
 import bg.softuni.mobilelele.service.OfferService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -46,22 +48,20 @@ public class OfferController {
     @PostMapping("/add")
     public String addOffer(@Valid AddOfferDto addOfferModel,
                            BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes redirectAttributes,
+                           @AuthenticationPrincipal UserDetails userDetails) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addOfferModel", bindingResult);
 
-            return "redirect:/offers/add";
+            return "redirect:add";
         }
 
-        // TODO
-
-        offerService.adOffer(addOfferModel);
+        offerService.adOffer(addOfferModel, userDetails);
 
         return "redirect:/offers/all";
     }
-
 
 
 }

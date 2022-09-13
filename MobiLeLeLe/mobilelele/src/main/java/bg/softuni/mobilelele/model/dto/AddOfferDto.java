@@ -3,10 +3,7 @@ package bg.softuni.mobilelele.model.dto;
 import bg.softuni.mobilelele.model.enums.EngineEnum;
 import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 public class AddOfferDto {
 
@@ -17,6 +14,7 @@ public class AddOfferDto {
     private Integer price;
     private Integer year;
     private String description;
+    private Integer mileage;
 
     @NotNull
     public EngineEnum getEngine() {
@@ -88,6 +86,17 @@ public class AddOfferDto {
 
     public AddOfferDto setDescription(String description) {
         this.description = description;
+        return this;
+    }
+
+    @NotNull
+    @Positive
+    public Integer getMileage() {
+        return mileage;
+    }
+
+    public AddOfferDto setMileage(Integer mileage) {
+        this.mileage = mileage;
         return this;
     }
 }
