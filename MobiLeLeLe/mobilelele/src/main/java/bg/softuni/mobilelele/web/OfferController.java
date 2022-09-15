@@ -60,7 +60,7 @@ public class OfferController {
 
         offerService.adOffer(addOfferModel, userDetails);
 
-        return "redirect:/offers/all";
+        return "redirect:all";
     }
 
 

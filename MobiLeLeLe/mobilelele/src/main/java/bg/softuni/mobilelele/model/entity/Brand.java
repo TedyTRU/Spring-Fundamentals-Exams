@@ -18,8 +18,9 @@ public class Brand extends BaseEntity{
         return name;
     }
 
-    public void setName(String name) {
+    public Brand setName(String name) {
         this.name = name;
+        return this;
     }
 
     @OneToMany(mappedBy = "brand", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -27,7 +28,8 @@ public class Brand extends BaseEntity{
         return models;
     }
 
-    public void setModels(List<Model> models) {
+    public Brand setModels(List<Model> models) {
         this.models = models;
+        return this;
     }
 }

@@ -9,12 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 
 
-
-
     @GetMapping("/login")
     public String login() {
         return "auth-login";
     }
-
 
 }

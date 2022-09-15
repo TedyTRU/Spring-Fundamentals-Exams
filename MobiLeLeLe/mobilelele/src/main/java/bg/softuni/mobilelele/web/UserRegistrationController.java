@@ -3,7 +3,6 @@ package bg.softuni.mobilelele.web;
 import bg.softuni.mobilelele.model.dto.UserRegisterDto;
 import bg.softuni.mobilelele.service.UserService;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -49,7 +48,7 @@ public class UserRegistrationController {
             redirectAttributes.addFlashAttribute("userModel", userModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
 
-            return "redirect:/register";
+            return "redirect:register";
         }
 
         userService.registerAndLogin(userModel);

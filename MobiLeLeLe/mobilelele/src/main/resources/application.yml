@@ -12,9 +12,9 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
   jpa:
     # Choose either MySQL 8 or MySQL 5 below
     # For MySQL 8
@@ -22,7 +22,7 @@ spring:
     #For MySQL 5
     #database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: validate
+      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
@@ -33,3 +33,9 @@ spring:
   #api-key:
   #api-secret:
   #cloud-name:
+
+mail:
+  host: "localhost"
+  port: 1025
+  username: "mobilele@mobilele.com"
+  password: ""

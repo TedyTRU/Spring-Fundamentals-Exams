@@ -23,8 +23,9 @@ public class Model extends BaseEntity {
         return name;
     }
 
-    public void setName(String name) {
+    public Model setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Enumerated(EnumType.STRING)
@@ -33,8 +34,9 @@ public class Model extends BaseEntity {
         return category;
     }
 
-    public void setCategory(CategoryEnum category) {
+    public Model setCategory(CategoryEnum category) {
         this.category = category;
+        return this;
     }
 
     @Column(length = 512)
@@ -42,8 +44,9 @@ public class Model extends BaseEntity {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Model setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     @Column(nullable = false)
@@ -51,16 +54,18 @@ public class Model extends BaseEntity {
         return startYear;
     }
 
-    public void setStartYear(Integer startYear) {
+    public Model setStartYear(Integer startYear) {
         this.startYear = startYear;
+        return this;
     }
 
     public Integer getEndYear() {
         return endYear;
     }
 
-    public void setEndYear(Integer endYear) {
+    public Model setEndYear(Integer endYear) {
         this.endYear = endYear;
+        return this;
     }
 
     @ManyToOne
@@ -68,7 +73,8 @@ public class Model extends BaseEntity {
         return brand;
     }
 
-    public void setBrand(Brand brand) {
+    public Model setBrand(Brand brand) {
         this.brand = brand;
+        return this;
     }
 }

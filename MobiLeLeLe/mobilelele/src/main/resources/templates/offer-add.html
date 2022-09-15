@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -41,8 +43,7 @@
                                 th:each="model : ${brand.models}"
                                 th:text="${model.name}"
                                 th:value="${model.id}"
-                                th:selected="*{modelId} == ${model.id}"
-                        >Model
+                                th:selected="*{modelId} == ${model.id}">Model
                         </option>
                     </optgroup>
                 </select>
