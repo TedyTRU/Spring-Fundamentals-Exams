@@ -20,7 +20,7 @@
 </div>
 
 <div class="container">
-    <h2 class="text-center text-white">Upload Offer</h2>
+    <h2 class="text-center text-white" th:text="#{offer_upload}">Upload Offer</h2>
     <form
             th:action="@{/offers/add}"
             th:method="POST"
@@ -30,7 +30,7 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="modelId">Model</label>
+                <label th:text="#{offer_model}" class="text-center text-white font-weight-bold" for="modelId">Model</label>
                 <select id="modelId"
                         name="modelId"
                         th:errorclass="is-invalid"
@@ -52,7 +52,7 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="price" class="text-white font-weight-bold">Price</label>
+                <label th:text="#{offer_price}" for="price" class="text-white font-weight-bold">Price</label>
                 <input id="price"
                        th:field="*{price}"
                        th:errorclass="is-invalid"
@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="engine">Engine</label>
+                <label th:text="#{offer_engine}" class="text-center text-white font-weight-bold" for="engine">Engine</label>
                 <select
                         id="engine"
                         name="engine"
@@ -84,7 +84,7 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
+                <label th:text="#{offer_transmission}" class="text-center text-white font-weight-bold" for="transmission">Transmission</label>
                 <select
                         id="transmission"
                         name="transmission"
@@ -105,7 +105,7 @@
         </div>
         <div class="row">
             <div class="form-group col-md-6 mb-3">
-                <label for="year" class="text-white font-weight-bold">Year</label>
+                <label th:text="#{offer_year}" for="year" class="text-white font-weight-bold">Year</label>
                 <input id="year"
                        th:field="*{year}"
                        th:errorclass="is-invalid"
@@ -116,7 +116,7 @@
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
-                <label for="mileage" class="text-white font-weight-bold">Mileage</label>
+                <label th:text="#{offer_mileage}" for="mileage" class="text-white font-weight-bold">Mileage</label>
                 <input id="mileage"
                        th:field="*{mileage}"
                        th:errorclass="is-invalid"
@@ -130,7 +130,7 @@
         </div>
 
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="description">Description</label>
+            <label th:text="#{offer_description}" class="text-white font-weight-bold" for="description">Description</label>
             <textarea id="description"
                       th:field="*{description}"
                       th:errorclass="is-invalid"
@@ -141,7 +141,7 @@
             </p>
         </div>
         <div class="form-group">
-            <label class="text-white font-weight-bold" for="imageUrl">Image URL</label>
+            <label th:text="#{offer_image_url}" class="text-white font-weight-bold" for="imageUrl">Image URL</label>
             <input id="imageUrl"
                    th:field="*{imageUrl}"
                    th:errorclass="is-invalid"
@@ -155,7 +155,7 @@
         <div class="row">
             <div class="col col-md-4">
                 <div class="button-holder d-flex">
-                    <input type="submit" class="btn btn-info btn-lg" value="Submit Offer"/>
+                    <input type="submit" class="btn btn-info btn-lg" th:value="#{offer_submit}"/>
                 </div>
             </div>
         </div>
