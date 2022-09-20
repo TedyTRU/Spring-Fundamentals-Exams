@@ -1,15 +1,24 @@
 package bg.softuni.mobilelele.service;
 
 import bg.softuni.mobilelele.model.dto.AddOfferDto;
+import bg.softuni.mobilelele.model.dto.OfferDetailDto;
 import bg.softuni.mobilelele.model.entity.Model;
 import bg.softuni.mobilelele.model.entity.Offer;
 import bg.softuni.mobilelele.model.entity.User;
+import bg.softuni.mobilelele.model.enums.EngineEnum;
+import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repository.ModelRepository;
 import bg.softuni.mobilelele.repository.OfferRepository;
 import bg.softuni.mobilelele.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OfferService {
@@ -24,6 +33,20 @@ public class OfferService {
         this.offerMapper = offerMapper;
         this.userRepository = userRepository;
         this.modelRepository = modelRepository;
+    }
+
+    public Page<OfferDetailDto> getAllOffers(Pageable pageable) {
+        return offerRepository
+                .findAll(pageable)
+                .map(offerMapper::offerToOfferDto);
+    }
+
+    public List<OfferDetailDto> findOfferByOfferName(String query) {
+        return offerRepository
+                .findAllByModel_Name(query)
+                .stream()
+                .map(offerMapper::offerToOfferDto)
+                .toList();
     }
 
     public void adOffer(AddOfferDto addOfferDto, UserDetails userDetails) {
@@ -53,4 +76,86 @@ public class OfferService {
     }
 
 
+    public void initOffers() {
+
+        if (offerRepository.count() != 0) {
+            return;
+        }
+
+        List<Offer> offers = new ArrayList<>();
+
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 1. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320001)
+                .setPrice(BigDecimal.valueOf(2601))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(2L)));
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 2. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320007)
+                .setPrice(BigDecimal.valueOf(2607))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(1L)));
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 3. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320002)
+                .setPrice(BigDecimal.valueOf(2602))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(1L)));
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 4. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320003)
+                .setPrice(BigDecimal.valueOf(2603))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(1L)));
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 5. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320004)
+                .setPrice(BigDecimal.valueOf(2604))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(1L)));
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 6. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320005)
+                .setPrice(BigDecimal.valueOf(2605))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(1L)));
+        offers.add(new Offer()
+                .setDescription("Качваш са, караш са, отиваш на фиеста 7. С Форд Фиеста.")
+                .setEngine(EngineEnum.GASOLINE)
+                .setImageUrl("https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg/280px-2005_Ford_Fiesta_%28WP%29_Ghia_5-door_hatchback_%282015-07-24%29_01.jpg")
+                .setMileage(320006)
+                .setPrice(BigDecimal.valueOf(2606))
+                .setTransmission(TransmissionEnum.MANUAL)
+                .setYear(2005)
+                .setModel(modelRepository.getById(1L))
+                .setSeller(userRepository.getById(1L)));
+
+
+        offerRepository.saveAll(offers);
+    }
 }

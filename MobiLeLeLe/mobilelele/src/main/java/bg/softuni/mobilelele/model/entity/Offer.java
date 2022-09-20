@@ -27,8 +27,9 @@ public class Offer extends BaseEntity {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Offer setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     @Enumerated(EnumType.STRING)
@@ -36,32 +37,36 @@ public class Offer extends BaseEntity {
         return engine;
     }
 
-    public void setEngine(EngineEnum engine) {
+    public Offer setEngine(EngineEnum engine) {
         this.engine = engine;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public Offer setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     public Integer getMileage() {
         return mileage;
     }
 
-    public void setMileage(Integer mileage) {
+    public Offer setMileage(Integer mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public Offer setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
     @Enumerated(EnumType.STRING)
@@ -69,16 +74,18 @@ public class Offer extends BaseEntity {
         return transmission;
     }
 
-    public void setTransmission(TransmissionEnum transmission) {
+    public Offer setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
+        return this;
     }
 
     public Integer getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public Offer setYear(Integer year) {
         this.year = year;
+        return this;
     }
 
     @ManyToOne
@@ -86,8 +93,9 @@ public class Offer extends BaseEntity {
         return model;
     }
 
-    public void setModel(Model model) {
+    public Offer setModel(Model model) {
         this.model = model;
+        return this;
     }
 
     @ManyToOne
@@ -95,7 +103,8 @@ public class Offer extends BaseEntity {
         return seller;
     }
 
-    public void setSeller(User seller) {
+    public Offer setSeller(User seller) {
         this.seller = seller;
+        return this;
     }
 }
