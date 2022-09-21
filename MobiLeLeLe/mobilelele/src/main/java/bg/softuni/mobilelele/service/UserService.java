@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 
 @Service
 public class UserService {
@@ -42,7 +44,8 @@ public class UserService {
         SecurityContextHolder.getContext().setAuthentication(auth);
     }
 
-    public void registerAndLogin(UserRegisterDto userRegisterDto) {
+    public void registerAndLogin(UserRegisterDto userRegisterDto,
+                                 Locale preferredLocale) {
 
 //        User newUser = new User();
 //        newUser.setActive(true);
@@ -59,7 +62,7 @@ public class UserService {
 
         login(newUser);
         emailService.sendRegistrationEmail(newUser.getEmail(),
-                newUser.getFirstName() + " " + newUser.getLastName());
+                newUser.getFirstName() + " " + newUser.getLastName(), preferredLocale);
     }
 
 }
