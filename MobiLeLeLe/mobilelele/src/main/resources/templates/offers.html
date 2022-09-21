@@ -89,7 +89,7 @@
         <ul class="pagination">
             <li class="page-item" th:classappend="${offers.isLast() ? 'disabled' : ''}">
                 <a th:unless="${offers.isLast()}"
-                   th:href="@{/offers/all(size=${offers.getSize()}, page=${offers.getTotalPages()})}"
+                   th:href="@{/offers/all(size=${offers.getSize()}, page=${offers.getTotalPages() - 1})}"
                    class="page-link" href="#">LAST</a>
                 <a th:if="${offers.isLast()}"
                    class="page-link" href="#">LAST</a>

@@ -30,7 +30,7 @@ public class OfferController {
     }
 
     @GetMapping("/all")
-    public String allOffers(Model model, @PageableDefault(page = 0, size = 5) Pageable pageable) {
+    public String allOffers(Model model, @PageableDefault(page = 0, size = 3) Pageable pageable) {
 
         model.addAttribute("offers", offerService.getAllOffers(pageable));
 
