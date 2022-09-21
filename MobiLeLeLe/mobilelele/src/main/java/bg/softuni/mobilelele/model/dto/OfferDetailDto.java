@@ -122,4 +122,8 @@ public class OfferDetailDto {
         this.sellerLastName = sellerLastName;
         return this;
     }
+
+    public String getOfferHighlight() {
+        return this.year + " " + this.brand + " " + this.model;
+    }
 }
