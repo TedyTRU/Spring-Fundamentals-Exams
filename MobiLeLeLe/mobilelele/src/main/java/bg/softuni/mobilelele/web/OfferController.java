@@ -1,6 +1,7 @@
 package bg.softuni.mobilelele.web;
 
 import bg.softuni.mobilelele.model.dto.AddOfferDto;
+import bg.softuni.mobilelele.model.dto.SearchOfferDto;
 import bg.softuni.mobilelele.service.BrandService;
 import bg.softuni.mobilelele.service.OfferService;
 import org.springframework.data.domain.Pageable;
@@ -31,8 +32,10 @@ public class OfferController {
     }
 
     @GetMapping("/all")
-    public String allOffers(Model model, @PageableDefault(sort = "price", direction = Sort.Direction.ASC,
-            page = 0, size = 3) Pageable pageable) {
+    public String allOffers(Model model,
+                            @PageableDefault(sort = "price",
+                                    direction = Sort.Direction.ASC,
+                                    page = 0, size = 3) Pageable pageable) {
 
         model.addAttribute("offers", offerService.getAllOffers(pageable));
 
@@ -69,5 +72,35 @@ public class OfferController {
         return "redirect:all";
     }
 
+    @GetMapping("/search")
+    public String search(Model model) {
+
+        if (!model.containsAttribute("searchOfferModel")) {
+            model.addAttribute("searchOfferModel", new SearchOfferDto());
+        }
+
+        return "offer-search";
+    }
+
+    @PostMapping("/search")
+    public String searchQuery(@Valid SearchOfferDto searchOfferDto,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("searchOfferModel", searchOfferDto);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
+
+            return "redirect:search";
+        }
+
+        if (!searchOfferDto.isEmpty()) {
+            redirectAttributes.addFlashAttribute("offers", offerService.searchOffer(searchOfferDto));
+
+            return "redirect:search";
+        }
+
+        return "redirect:search";
+    }
 
 }

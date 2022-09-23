@@ -2,6 +2,7 @@ package bg.softuni.mobilelele.service;
 
 import bg.softuni.mobilelele.model.dto.AddOfferDto;
 import bg.softuni.mobilelele.model.dto.OfferDetailDto;
+import bg.softuni.mobilelele.model.dto.SearchOfferDto;
 import bg.softuni.mobilelele.model.entity.Model;
 import bg.softuni.mobilelele.model.entity.Offer;
 import bg.softuni.mobilelele.model.entity.User;
@@ -10,6 +11,7 @@ import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repository.ModelRepository;
 import bg.softuni.mobilelele.repository.OfferRepository;
+import bg.softuni.mobilelele.repository.OfferSpecification;
 import bg.softuni.mobilelele.repository.UserRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -157,5 +159,12 @@ public class OfferService {
 
 
         offerRepository.saveAll(offers);
+    }
+
+    public List<OfferDetailDto> searchOffer(SearchOfferDto searchOfferDto) {
+        return offerRepository.findAll(new OfferSpecification(searchOfferDto))
+                .stream()
+                .map(offer -> offerMapper.offerToOfferDto(offer))
+                .toList();
     }
 }
