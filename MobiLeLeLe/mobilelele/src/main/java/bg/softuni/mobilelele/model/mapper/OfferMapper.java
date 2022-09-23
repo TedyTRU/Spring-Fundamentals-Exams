@@ -1,7 +1,7 @@
 package bg.softuni.mobilelele.model.mapper;
 
-import bg.softuni.mobilelele.model.dto.AddOfferDto;
-import bg.softuni.mobilelele.model.dto.OfferDetailDto;
+import bg.softuni.mobilelele.model.dto.offer.AddOfferDto;
+import bg.softuni.mobilelele.model.dto.offer.OfferDetailDto;
 import bg.softuni.mobilelele.model.entity.Offer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

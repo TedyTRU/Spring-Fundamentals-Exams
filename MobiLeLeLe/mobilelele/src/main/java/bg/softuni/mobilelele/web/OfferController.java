@@ -1,9 +1,10 @@
 package bg.softuni.mobilelele.web;
 
-import bg.softuni.mobilelele.model.dto.AddOfferDto;
-import bg.softuni.mobilelele.model.dto.SearchOfferDto;
+import bg.softuni.mobilelele.model.dto.offer.AddOfferDto;
+import bg.softuni.mobilelele.model.dto.offer.SearchOfferDto;
 import bg.softuni.mobilelele.service.BrandService;
 import bg.softuni.mobilelele.service.OfferService;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -101,6 +103,18 @@ public class OfferController {
         }
 
         return "redirect:search";
+    }
+
+    @GetMapping("/{id}/details")
+    public String getOfferDetail(@PathVariable("id") Long id,
+                                 Model model) {
+
+        var offer = offerService.getOfferDetails(id)
+                .orElseThrow();
+
+        model.addAttribute("offer", offer);
+
+        return "details";
     }
 
 }

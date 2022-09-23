@@ -1,6 +1,6 @@
 package bg.softuni.mobilelele.repository;
 
-import bg.softuni.mobilelele.model.dto.SearchOfferDto;
+import bg.softuni.mobilelele.model.dto.offer.SearchOfferDto;
 import bg.softuni.mobilelele.model.entity.Offer;
 import org.springframework.data.jpa.domain.Specification;
 

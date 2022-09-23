@@ -1,8 +1,8 @@
 package bg.softuni.mobilelele.service;
 
-import bg.softuni.mobilelele.model.dto.AddOfferDto;
-import bg.softuni.mobilelele.model.dto.OfferDetailDto;
-import bg.softuni.mobilelele.model.dto.SearchOfferDto;
+import bg.softuni.mobilelele.model.dto.offer.AddOfferDto;
+import bg.softuni.mobilelele.model.dto.offer.OfferDetailDto;
+import bg.softuni.mobilelele.model.dto.offer.SearchOfferDto;
 import bg.softuni.mobilelele.model.entity.Model;
 import bg.softuni.mobilelele.model.entity.Offer;
 import bg.softuni.mobilelele.model.entity.User;
@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OfferService {
@@ -164,7 +165,13 @@ public class OfferService {
     public List<OfferDetailDto> searchOffer(SearchOfferDto searchOfferDto) {
         return offerRepository.findAll(new OfferSpecification(searchOfferDto))
                 .stream()
-                .map(offer -> offerMapper.offerToOfferDto(offer))
+                .map(offerMapper::offerToOfferDto)
                 .toList();
+    }
+
+    public Optional<OfferDetailDto> getOfferDetails(Long id) {
+        return offerRepository
+                .findById(id)
+                .map(offerMapper::offerToOfferDto);
     }
 }

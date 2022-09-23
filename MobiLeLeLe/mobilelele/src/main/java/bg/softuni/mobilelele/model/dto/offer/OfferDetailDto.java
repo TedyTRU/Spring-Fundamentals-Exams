@@ -1,4 +1,4 @@
-package bg.softuni.mobilelele.model.dto;
+package bg.softuni.mobilelele.model.dto.offer;
 
 import bg.softuni.mobilelele.model.enums.EngineEnum;
 import bg.softuni.mobilelele.model.enums.TransmissionEnum;
@@ -121,6 +121,10 @@ public class OfferDetailDto {
     public OfferDetailDto setSellerLastName(String sellerLastName) {
         this.sellerLastName = sellerLastName;
         return this;
+    }
+
+    public String getSellerFullName() {
+        return this.sellerFirstName + " " + this.sellerLastName;
     }
 
     public String getOfferHighlight() {
