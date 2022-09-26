@@ -23,8 +23,9 @@ public class User extends BaseEntity {
         return email;
     }
 
-    public void setEmail(String username) {
+    public User setEmail(String username) {
         this.email = username;
+        return this;
     }
 
     @Column(nullable = false)
@@ -32,8 +33,9 @@ public class User extends BaseEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public User setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     @Column(nullable = false)
@@ -41,8 +43,9 @@ public class User extends BaseEntity {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public User setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     @Column(nullable = false)
@@ -50,8 +53,9 @@ public class User extends BaseEntity {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public User setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     @Column(name = "is_active")
@@ -59,16 +63,18 @@ public class User extends BaseEntity {
         return isActive;
     }
 
-    public void setActive(Boolean active) {
+    public User setActive(Boolean active) {
         isActive = active;
+        return this;
     }
 
     public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(String imageUrl) {
+    public User setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+        return this;
     }
 
     @ManyToMany(fetch = FetchType.EAGER)
