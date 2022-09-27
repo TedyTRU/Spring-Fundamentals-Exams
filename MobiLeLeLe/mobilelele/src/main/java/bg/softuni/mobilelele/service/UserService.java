@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 
@@ -65,4 +67,30 @@ public class UserService {
                 newUser.getFirstName() + " " + newUser.getLastName(), preferredLocale);
     }
 
+    public void initUsers() {
+
+        if (userRepository.count() != 0) {
+            return;
+        }
+
+        List<User> users = new ArrayList<>();
+
+        users
+                .add(new User()
+                        .setEmail("lachezar.balev@gmail.com")
+                        .setFirstName("Lucho")
+                        .setLastName("Balev")
+                        .setImageUrl(null)
+                        .setActive(true)
+                        .setPassword("topsecret"));
+        users
+                .add(new User()
+                        .setEmail("example@example.com")
+                        .setFirstName("example")
+                        .setLastName("exampalov")
+                        .setActive(false)
+                        .setPassword("topsecret"));
+
+        userRepository.saveAll(users);
+    }
 }

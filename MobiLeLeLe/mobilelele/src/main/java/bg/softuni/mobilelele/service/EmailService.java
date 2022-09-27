@@ -38,7 +38,8 @@ public class EmailService {
             javaMailSender.send(mimeMessageHelper.getMimeMessage());
 
         } catch (MessagingException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
+            throw new RuntimeException(e);
         }
 
     }

@@ -3,6 +3,7 @@ package bg.softuni.mobilelele.init;
 import bg.softuni.mobilelele.service.BrandService;
 import bg.softuni.mobilelele.service.ModelService;
 import bg.softuni.mobilelele.service.OfferService;
+import bg.softuni.mobilelele.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +13,20 @@ public class DataBaseInit implements CommandLineRunner {
     private final BrandService brandService;
     private final ModelService modelService;
     private final OfferService offerService;
+    private final UserService userService;
 
-    public DataBaseInit(BrandService brandService, ModelService modelService, OfferService offerService) {
+    public DataBaseInit(BrandService brandService, ModelService modelService, OfferService offerService, UserService userService) {
         this.brandService = brandService;
         this.modelService = modelService;
         this.offerService = offerService;
+        this.userService = userService;
     }
 
     @Override
     public void run(String... args) throws Exception {
         brandService.initBrands();
         modelService.initModels();
+        userService.initUsers();
         offerService.initOffers();
     }
 }
