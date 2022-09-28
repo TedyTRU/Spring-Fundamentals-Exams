@@ -4,6 +4,7 @@ import bg.softuni.mobilelele.model.dto.UserRegisterDto;
 import bg.softuni.mobilelele.model.entity.User;
 import bg.softuni.mobilelele.model.mapper.UserMapper;
 import bg.softuni.mobilelele.repository.UserRepository;
+import bg.softuni.mobilelele.repository.UserRoleRepository;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,13 +26,15 @@ public class UserService {
     private final UserMapper userMapper;
     private final UserDetailsService userDetailsService;
     private final EmailService emailService;
+    private final UserRoleRepository userRoleRepository;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserDetailsService userDetailsService, EmailService emailService) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserMapper userMapper, UserDetailsService userDetailsService, EmailService emailService, UserRoleRepository userRoleRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
         this.userDetailsService = userDetailsService;
         this.emailService = emailService;
+        this.userRoleRepository = userRoleRepository;
     }
 
     private void login(User user) {
@@ -58,6 +61,7 @@ public class UserService {
 
         User newUser = userMapper.userDtoToUserEntity(userRegisterDto);
         newUser.setPassword(passwordEncoder.encode(userRegisterDto.getPassword()));
+        newUser.setRole(List.of(userRoleRepository.getById(1L)));
 
         //newUser = userRepository.save(newUser);
         userRepository.save(newUser);
@@ -82,14 +86,18 @@ public class UserService {
                         .setLastName("Balev")
                         .setImageUrl(null)
                         .setActive(true)
-                        .setPassword("topsecret"));
+                        .setPassword("topsecret")
+                        .setRole(List.of(userRoleRepository.getById(1L), userRoleRepository.getById(2L)))
+                );
         users
                 .add(new User()
                         .setEmail("example@example.com")
                         .setFirstName("example")
                         .setLastName("exampalov")
                         .setActive(false)
-                        .setPassword("topsecret"));
+                        .setPassword("topsecret")
+                        .setRole(List.of(userRoleRepository.getById(1L)))
+                );
 
         userRepository.saveAll(users);
     }
