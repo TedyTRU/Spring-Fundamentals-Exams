@@ -51,8 +51,6 @@ public class UserRegistrationControllerMockBeanT {
 
         verify(mockEmailService)
                 .sendRegistrationEmail("anna@ann.com", "Anna Aneva", Locale.GERMAN);
-
     }
-
 
 }
