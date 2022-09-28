@@ -8,6 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.servlet.http.Cookie;
+import java.util.Locale;
+
+import static org.mockito.Mockito.verify;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -15,8 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserRegistrationControllerT {
-
+public class UserRegistrationControllerMockBeanT {
 
     @Autowired
     private MockMvc mockMvc;
@@ -36,16 +39,20 @@ public class UserRegistrationControllerT {
         mockMvc.perform(post("/users/register")
                         .param("email", "anna@ann.com")
                         .param("firstName", "Anna")
-                        .param("lastName", "Anneva")
+                        .param("lastName", "Aneva")
                         .param("password", "123456")
                         .param("confirmPassword", "123456")
                         .with(csrf())
+                        .cookie(new Cookie("lang", Locale.GERMAN.getLanguage()))
 
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/"));
 
+        verify(mockEmailService)
+                .sendRegistrationEmail("anna@ann.com", "Anna Aneva", Locale.GERMAN);
 
     }
+
 
 }
