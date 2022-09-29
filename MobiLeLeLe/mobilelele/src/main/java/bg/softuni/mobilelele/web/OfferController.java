@@ -74,35 +74,50 @@ public class OfferController {
         return "redirect:all";
     }
 
+//    @GetMapping("/search")
+//    public String search(Model model) {
+//
+//        if (!model.containsAttribute("searchOfferModel")) {
+//            model.addAttribute("searchOfferModel", new SearchOfferDto());
+//        }
+//
+//        return "offer-search";
+//    }
+
+//    @PostMapping("/search")
+//    public String searchQuery(@Valid SearchOfferDto searchOfferDto,
+//                              BindingResult bindingResult,
+//                              RedirectAttributes redirectAttributes) {
+//
+//        if (bindingResult.hasErrors()) {
+//            redirectAttributes.addFlashAttribute("searchOfferModel", searchOfferDto);
+//            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
+//
+//            return "redirect:search";
+//        }
+//
+//        if (!searchOfferDto.isEmpty()) {
+//            redirectAttributes.addFlashAttribute("offers", offerService.searchOffer(searchOfferDto));
+//
+//            return "redirect:search";
+//        }
+//
+//        return "redirect:search";
+//    }
+
     @GetMapping("/search")
-    public String search(Model model) {
+    public String search(SearchOfferDto searchOfferDto,
+                         Model model) {
 
         if (!model.containsAttribute("searchOfferModel")) {
-            model.addAttribute("searchOfferModel", new SearchOfferDto());
-        }
-
-        return "offer-search";
-    }
-
-    @PostMapping("/search")
-    public String searchQuery(@Valid SearchOfferDto searchOfferDto,
-                              BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
-
-        if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("searchOfferModel", searchOfferDto);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
-
-            return "redirect:search";
+            model.addAttribute("searchOfferModel", searchOfferDto);
         }
 
         if (!searchOfferDto.isEmpty()) {
-            redirectAttributes.addFlashAttribute("offers", offerService.searchOffer(searchOfferDto));
-
-            return "redirect:search";
+            model.addAttribute("offers", offerService.searchOffer(searchOfferDto));
         }
 
-        return "redirect:search";
+        return "offer-search";
     }
 
     @GetMapping("/{id}/details")

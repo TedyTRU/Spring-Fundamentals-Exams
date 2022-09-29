@@ -23,20 +23,23 @@ public class OfferSpecification implements Specification<Offer> {
         Predicate predicate = criteriaBuilder.conjunction();
 
         if (searchOfferDto.getModel() != null && !searchOfferDto.getModel().isEmpty()) {
-            predicate.getExpressions().add(
-                    criteriaBuilder.and(criteriaBuilder.equal(root.join("model").get("name"), searchOfferDto.getModel()))
-            );
+            predicate.getExpressions()
+                    .add(criteriaBuilder.and(criteriaBuilder
+                            .equal(root.join("model").get("name"), searchOfferDto.getModel()))
+                    );
         }
 
         if (searchOfferDto.getMinPrice() != null) {
             predicate.getExpressions().add(
-                    criteriaBuilder.and(criteriaBuilder.greaterThanOrEqualTo(root.get("price"), searchOfferDto.getMinPrice()))
+                    criteriaBuilder.and(criteriaBuilder
+                            .greaterThanOrEqualTo(root.get("price"), searchOfferDto.getMinPrice()))
             );
         }
 
         if (searchOfferDto.getMaxPrice() != null) {
             predicate.getExpressions().add(
-                    criteriaBuilder.and(criteriaBuilder.lessThanOrEqualTo(root.get("price"), searchOfferDto.getMaxPrice()))
+                    criteriaBuilder.and(criteriaBuilder
+                            .lessThanOrEqualTo(root.get("price"), searchOfferDto.getMaxPrice()))
             );
         }
 

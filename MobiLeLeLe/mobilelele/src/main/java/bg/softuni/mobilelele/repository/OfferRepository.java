@@ -8,7 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OfferRepository extends JpaRepository<Offer, Long>, JpaSpecificationExecutor<Offer> {
+public interface OfferRepository extends
+        JpaRepository<Offer, Long>,
+        JpaSpecificationExecutor<Offer> {
 
     List<Offer> findAllByModel_Name(String query);
 

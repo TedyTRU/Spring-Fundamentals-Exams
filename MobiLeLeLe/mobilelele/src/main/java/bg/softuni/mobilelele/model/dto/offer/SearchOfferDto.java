@@ -9,7 +9,7 @@ public class SearchOfferDto {
     private Integer minPrice;
     private Integer maxPrice;
 
-    @NotBlank
+    // @NotBlank
     public String getModel() {
         return model;
     }
@@ -19,7 +19,7 @@ public class SearchOfferDto {
         return this;
     }
 
-    @NotNull
+    // @NotNull
     public Integer getMinPrice() {
         return minPrice;
     }
@@ -29,7 +29,7 @@ public class SearchOfferDto {
         return this;
     }
 
-    @NotNull
+    // @NotNull
     public Integer getMaxPrice() {
         return maxPrice;
     }
@@ -44,4 +44,14 @@ public class SearchOfferDto {
                 minPrice == null &&
                 maxPrice == null;
     }
+
+    @Override
+    public String toString() {
+        return "SearchOfferDto{" +
+                "model='" + model + '\'' +
+                ", minPrice=" + minPrice +
+                ", maxPrice=" + maxPrice +
+                '}';
+    }
+
 }
