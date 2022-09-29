@@ -73,12 +73,6 @@ public class OfferService {
         offerRepository.save(newOffer);
     }
 
-    private Offer mapToEntity(AddOfferDto addOfferDto) {
-
-        return null;
-    }
-
-
     public void initOffers() {
 
         if (offerRepository.count() != 0) {

@@ -1,15 +1,11 @@
 package bg.softuni.mobilelele.model.dto.offer;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-
 public class SearchOfferDto {
 
     private String model;
     private Integer minPrice;
     private Integer maxPrice;
 
-    // @NotBlank
     public String getModel() {
         return model;
     }
@@ -19,7 +15,6 @@ public class SearchOfferDto {
         return this;
     }
 
-    // @NotNull
     public Integer getMinPrice() {
         return minPrice;
     }
@@ -29,7 +24,6 @@ public class SearchOfferDto {
         return this;
     }
 
-    // @NotNull
     public Integer getMaxPrice() {
         return maxPrice;
     }
