@@ -29,16 +29,14 @@
             class="form-inline"
             style="justify-content: center; margin-top: 50px">
 
-
-<!--        <th:block th:if="${#fields.hasErrors('${searchOfferModel.*}')}">-->
-<!--            <small-->
-<!--                    id="searchOfferHelpInline"-->
-<!--                    class="bg-danger text-light rounded mb-2"-->
-<!--                    style="width: 97%; position:relative; padding: 3px 15px; text-align: center;"-->
-<!--            >-->
-<!--                Try to write something this time.-->
-<!--            </small>-->
-<!--        </th:block>-->
+        <th:block th:if="${#fields.hasErrors('${searchOfferModel.*}')}">
+            <small
+                    id="searchOfferHelpInline"
+                    style="width: 55%; position:relative; padding: 3px 15px; text-align: center;"
+                    class="text-center text-light form-text bg-danger rounded mb-2" >
+                Try to write something this time.
+            </small>
+        </th:block>
         <br/>
 
         <div class="form-group">

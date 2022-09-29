@@ -74,8 +74,16 @@ public class OfferController {
     }
 
     @GetMapping("/search")
-    public String search(SearchOfferDto searchOfferDto,
+    public String search(@Valid SearchOfferDto searchOfferDto,
+                         BindingResult bindingResult,
                          Model model) {
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("searchOfferModel", searchOfferDto);
+            model.addAttribute("org.springframework.validation.BindingResult.searchOfferModel", bindingResult);
+
+            return "offer-search";
+        }
 
         if (!model.containsAttribute("searchOfferModel")) {
             model.addAttribute("searchOfferModel", searchOfferDto);
