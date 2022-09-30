@@ -25,7 +25,7 @@
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">
 
             <div class="card-body pb-1">
-                <h5 class="card-title">
+                <h5 class="card-title" th:text="*{getOfferHighlight()}">
                     Offer year Brand name Model name</h5>
             </div>
             <ul class="offer-details list-group list-group-flush">
@@ -40,8 +40,13 @@
                 </li>
             </ul>
             <div class="card-body">
-                <a class="card-link" href="/">Update</a>
-                <a class="card-link" href="/">Delete</a>
+
+<!--                <a class="card-link" th:href="@{/}">Update</a>-->
+                <form th:method="DELETE"
+                      th:action="@{/offers/{id}(id=*{id})}" >
+                    <input type="submit" value="Delete">
+                </form>
+<!--                <a class="card-link" th:href="@{/}">Delete</a>-->
             </div>
         </div>
         <div class="offer card col-sm-2 col-md-3  col-lg-4 m-1 p-0">

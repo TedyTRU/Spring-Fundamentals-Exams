@@ -7,6 +7,7 @@ import bg.softuni.mobilelele.model.entity.Model;
 import bg.softuni.mobilelele.model.entity.Offer;
 import bg.softuni.mobilelele.model.entity.User;
 import bg.softuni.mobilelele.model.enums.EngineEnum;
+import bg.softuni.mobilelele.model.enums.RoleEnum;
 import bg.softuni.mobilelele.model.enums.TransmissionEnum;
 import bg.softuni.mobilelele.model.mapper.OfferMapper;
 import bg.softuni.mobilelele.repository.ModelRepository;
@@ -168,4 +169,35 @@ public class OfferService {
                 .findById(id)
                 .map(offerMapper::offerToOfferDto);
     }
+
+    public boolean isOwner(String userName, Long offerId) {
+
+        boolean isOwner = offerRepository
+                .findById(offerId)
+                .filter(o -> o.getSeller().getEmail().equals(userName))
+                .isPresent();
+
+        if (isOwner) {
+            return true;
+        }
+
+        boolean isAdmin = userRepository
+                .findByEmail(userName)
+                .filter(this::isAdmin)
+                .isPresent();
+
+        return isAdmin;
+    }
+
+    private boolean isAdmin(User user) {
+        return user
+                .getRole()
+                .stream()
+                .anyMatch(r -> r.getRole() == RoleEnum.ADMIN);
+    }
+
+    public void deleteOfferById(Long offerId) {
+        offerRepository.deleteById(offerId);
+    }
+
 }

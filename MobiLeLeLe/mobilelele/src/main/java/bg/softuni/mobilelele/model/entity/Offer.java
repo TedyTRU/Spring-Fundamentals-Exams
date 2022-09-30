@@ -23,6 +23,7 @@ public class Offer extends BaseEntity {
     public Offer() {
     }
 
+    @Column(nullable = false, columnDefinition = "LONGTEXT")
     public String getDescription() {
         return description;
     }
@@ -33,6 +34,7 @@ public class Offer extends BaseEntity {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public EngineEnum getEngine() {
         return engine;
     }
@@ -60,6 +62,7 @@ public class Offer extends BaseEntity {
         return this;
     }
 
+    @Column(nullable = false)
     public BigDecimal getPrice() {
         return price;
     }
@@ -70,6 +73,7 @@ public class Offer extends BaseEntity {
     }
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     public TransmissionEnum getTransmission() {
         return transmission;
     }
