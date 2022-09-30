@@ -108,15 +108,23 @@ public class OfferController {
         return "details";
     }
 
-    @PreAuthorize("@offerService.isOwner(#principal.name, #id)")
+//    @PreAuthorize("@offerService.isOwner(#principal.name, #id)")
+//    @DeleteMapping("/{id}")
+//    public String deleteOffer(Principal principal,
+//                              @PathVariable("id") Long id) {
+//
+//        offerService.deleteOfferById(id);
+//
+//        return "redirect:all";
+//    }
+
+    @PreAuthorize("isOwner(#id)")
     @DeleteMapping("/{id}")
-    public String deleteOffer(Principal principal,
-                              @PathVariable("id") Long id) {
+    public String deleteOffer(@PathVariable("id") Long id) {
 
         offerService.deleteOfferById(id);
 
         return "redirect:all";
     }
-
 
 }
