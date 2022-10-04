@@ -62,7 +62,11 @@ public class TestDataUtils {
                 .setFirstName("User")
                 .setLastName("Userov")
                 .setActive(true)
-                .setRole(userRoleRepository.findAll());
+                .setRole(userRoleRepository
+                        .findAll()
+                        .stream()
+                        .filter(r -> r.getRole() != RoleEnum.ADMIN)
+                        .toList());
 
         return userRepository.save(user);
     }
