@@ -23,7 +23,8 @@ public class Offer extends BaseEntity {
     public Offer() {
     }
 
-    @Column(nullable = false, columnDefinition = "LONGTEXT")
+    @Lob
+    @Column(nullable = false)
     public String getDescription() {
         return description;
     }

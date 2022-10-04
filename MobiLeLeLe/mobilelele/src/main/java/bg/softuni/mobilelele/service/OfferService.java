@@ -45,13 +45,13 @@ public class OfferService {
                 .map(offerMapper::offerToOfferDto);
     }
 
-    public List<OfferDetailDto> findOfferByOfferName(String query) {
-        return offerRepository
-                .findAllByModel_Name(query)
-                .stream()
-                .map(offerMapper::offerToOfferDto)
-                .toList();
-    }
+//    public List<OfferDetailDto> findOfferByOfferName(String query) {
+//        return offerRepository
+//                .findAllByModel_Name(query)
+//                .stream()
+//                .map(offerMapper::offerToOfferDto)
+//                .toList();
+//    }
 
     public void adOffer(AddOfferDto addOfferDto, UserDetails userDetails) {
 

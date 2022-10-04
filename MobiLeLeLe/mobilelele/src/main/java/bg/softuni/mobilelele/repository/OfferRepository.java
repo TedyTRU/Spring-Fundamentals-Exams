@@ -12,6 +12,6 @@ public interface OfferRepository extends
         JpaRepository<Offer, Long>,
         JpaSpecificationExecutor<Offer> {
 
-    List<Offer> findAllByModel_Name(String query);
+//    List<Offer> findAllByModel_Name(String query);
 
 }

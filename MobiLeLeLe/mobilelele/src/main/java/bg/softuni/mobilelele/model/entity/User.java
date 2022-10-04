@@ -28,7 +28,7 @@ public class User extends BaseEntity {
         return this;
     }
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     public String getPassword() {
         return password;
     }
