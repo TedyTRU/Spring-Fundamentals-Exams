@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
 @Service
 public class UserService {
 
@@ -37,8 +36,8 @@ public class UserService {
         this.userRoleRepository = userRoleRepository;
     }
 
-    private void login(User user) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
+    public void login(String userName) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
 
         Authentication auth = new UsernamePasswordAuthenticationToken(
                 userDetails,
@@ -66,7 +65,7 @@ public class UserService {
         //newUser = userRepository.save(newUser);
         userRepository.save(newUser);
 
-        login(newUser);
+        login(newUser.getEmail());
         emailService.sendRegistrationEmail(newUser.getEmail(),
                 newUser.getFirstName() + " " + newUser.getLastName(), preferredLocale);
     }
@@ -101,4 +100,35 @@ public class UserService {
 
         userRepository.saveAll(users);
     }
+
+    public void createUserIfNotExist(String email, Authentication authentication) {
+
+        var userOpt = this.userRepository.findByEmail(email);
+
+        if (userOpt.isEmpty()) {
+
+            UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
+
+            Authentication auth = new UsernamePasswordAuthenticationToken(
+                    userDetails,
+                    userDetails.getPassword(),
+                    userDetails.getAuthorities()
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(auth);
+
+
+
+            var newUser = new User()
+                    .setEmail(email)
+                    .setPassword(userDetails.getPassword())
+                    .setFirstName(userDetails.getUsername())
+                    .setLastName("User")
+                    .setRole(List.of());
+
+            userRepository.save(newUser);
+        }
+
+    }
+
 }

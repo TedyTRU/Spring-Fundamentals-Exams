@@ -2,10 +2,11 @@ package bg.softuni.mobilelele.config;
 
 import bg.softuni.mobilelele.repository.UserRepository;
 import bg.softuni.mobilelele.service.MobileleUserDetailsService;
+import bg.softuni.mobilelele.service.OAuthSuccessHandler;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,7 +23,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http, OAuthSuccessHandler oAuthSuccessHandler) throws Exception {
 
         http
                 .authorizeRequests()
@@ -44,11 +45,16 @@ public class SecurityConfig {
                 // on logout go to the home page
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID");
+                .deleteCookies("JSESSIONID")
+        .and()
+                .oauth2Login()
+                .loginPage("/users/login")
+                .successHandler(oAuthSuccessHandler);
 
         return http.build();
     }
 
+    @Primary
     @Bean
     public UserDetailsService userDetailsService(UserRepository userRepository) {
         return new MobileleUserDetailsService(userRepository);
