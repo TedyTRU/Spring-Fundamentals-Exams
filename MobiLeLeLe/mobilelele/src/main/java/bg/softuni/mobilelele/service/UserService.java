@@ -101,28 +101,16 @@ public class UserService {
         userRepository.saveAll(users);
     }
 
-    public void createUserIfNotExist(String email, Authentication authentication) {
+    public void createUserIfNotExist(String email) {
 
         var userOpt = this.userRepository.findByEmail(email);
 
         if (userOpt.isEmpty()) {
 
-            UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
-
-            Authentication auth = new UsernamePasswordAuthenticationToken(
-                    userDetails,
-                    userDetails.getPassword(),
-                    userDetails.getAuthorities()
-            );
-
-            SecurityContextHolder.getContext().setAuthentication(auth);
-
-
-
             var newUser = new User()
                     .setEmail(email)
-                    .setPassword(userDetails.getPassword())
-                    .setFirstName(userDetails.getUsername())
+                    .setPassword(null)
+                    .setFirstName("Test")
                     .setLastName("User")
                     .setRole(List.of());
 

@@ -52,7 +52,7 @@
                         <div class="logged-user"
                              text="Welcome, Gosho">Welcome,
                             <th:block sec:authentication="name"
-                                      th:text="${#authentication.principal.firstName}">X
+                                      th:text="${#authentication.principal.fullName}">X
                             </th:block>
                             !
                         </div>
