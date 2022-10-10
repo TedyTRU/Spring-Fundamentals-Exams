@@ -170,6 +170,12 @@ public class OfferService {
                 .map(offerMapper::offerToOfferDto);
     }
 
+    public Optional<AddOfferDto> findOfferById(Long id) {
+        return offerRepository
+                .findById(id)
+                .map(offerMapper::offerEntityToAddOfferDto);
+    }
+
     public boolean isOwner(String userName, Long offerId) {
 
         boolean isOwner = offerRepository

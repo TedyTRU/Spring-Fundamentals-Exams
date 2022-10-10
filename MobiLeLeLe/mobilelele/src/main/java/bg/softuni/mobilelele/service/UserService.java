@@ -109,7 +109,7 @@ public class UserService {
 
             var newUser = new User()
                     .setEmail(email)
-                    .setPassword(null)
+                    .setPassword("topsecret")
                     .setFirstName("Test")
                     .setLastName("User")
                     .setRole(List.of());

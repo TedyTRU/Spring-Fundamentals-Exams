@@ -127,4 +127,16 @@ public class OfferController {
         return "redirect:all";
     }
 
+    @GetMapping("/{id}/edit")
+    public String editOffer(@PathVariable("id") Long id,
+                            Model model) {
+
+        var offer = offerService.findOfferById(id)
+                .orElseThrow(() -> new ObjectNotFoundException("Offer with ID " + id + " not found!"));
+
+        model.addAttribute("offer", offer);
+
+        return "offer-add";
+    }
+
 }
