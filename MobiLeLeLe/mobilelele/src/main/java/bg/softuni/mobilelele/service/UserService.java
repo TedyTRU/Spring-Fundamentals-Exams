@@ -85,7 +85,7 @@ public class UserService {
                         .setLastName("Balev")
                         .setImageUrl(null)
                         .setActive(true)
-                        .setPassword("topsecret")
+                        .setPassword(passwordEncoder.encode("topsecret"))
                         .setRole(List.of(userRoleRepository.getById(1L), userRoleRepository.getById(2L)))
                 );
         users
@@ -94,14 +94,14 @@ public class UserService {
                         .setFirstName("example")
                         .setLastName("exampalov")
                         .setActive(false)
-                        .setPassword("topsecret")
+                        .setPassword(passwordEncoder.encode("topsecret"))
                         .setRole(List.of(userRoleRepository.getById(1L)))
                 );
 
         userRepository.saveAll(users);
     }
 
-    public void createUserIfNotExist(String email) {
+    public void createUserIfNotExist(String email, String userName) {
 
         var userOpt = this.userRepository.findByEmail(email);
 
@@ -109,9 +109,9 @@ public class UserService {
 
             var newUser = new User()
                     .setEmail(email)
-                    .setPassword("topsecret")
-                    .setFirstName("Test")
-                    .setLastName("User")
+                    .setPassword(null)
+                    .setFirstName(userName.split(" ")[0])
+                    .setLastName(userName.split(" ")[1])
                     .setRole(List.of());
 
             userRepository.save(newUser);

@@ -33,7 +33,12 @@ public class OAuthSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
                     .getAttribute("email")
                     .toString();
 
-            userService.createUserIfNotExist(userEmail);
+            var userName = oAuth2AuthenticationToken
+                    .getPrincipal()
+                    .getAttribute("name")
+                    .toString();
+
+            userService.createUserIfNotExist(userEmail, userName);
             userService.login(userEmail);
         }
 
