@@ -3,6 +3,7 @@ package bg.softuni.mobilelele.config;
 import bg.softuni.mobilelele.repository.UserRepository;
 import bg.softuni.mobilelele.service.MobileleUserDetailsService;
 import bg.softuni.mobilelele.service.OAuthSuccessHandler;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,8 +29,10 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
+                .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
                 .antMatchers("/offers/**").permitAll()
+//                .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
         .and()
                 .formLogin()
