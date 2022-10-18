@@ -31,6 +31,7 @@ public class SecurityConfig {
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
                 .antMatchers("/", "/users/login", "/users/register").permitAll()
+                .antMatchers("/offers/add").authenticated()
                 .antMatchers("/offers/**").permitAll()
 //                .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
