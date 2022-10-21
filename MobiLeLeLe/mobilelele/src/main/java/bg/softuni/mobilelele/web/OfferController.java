@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 @Controller
 @RequestMapping("/offers")
@@ -127,16 +126,40 @@ public class OfferController {
         return "redirect:all";
     }
 
+    @PreAuthorize("isOwner(#id)")
     @GetMapping("/{id}/edit")
     public String editOffer(@PathVariable("id") Long id,
                             Model model) {
 
+        AddOfferDto addOfferModel = offerService
+                .findOfferById(id).orElseThrow(() -> new ObjectNotFoundException("Offer with ID " + id + " not found!"));
+
         var offer = offerService.findOfferById(id)
                 .orElseThrow(() -> new ObjectNotFoundException("Offer with ID " + id + " not found!"));
 
-        model.addAttribute("offer", offer);
+        model.addAttribute("addOfferModel", addOfferModel);
+        model.addAttribute("brands", brandService.getAllBrands());
 
-        return "offer-add";
+        return "update";
     }
 
+
+    @PostMapping("/edit")
+    public String updateOffer(
+            @Valid AddOfferDto addOfferModel,
+            BindingResult bindingResult,
+            RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal UserDetails userDetails) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addOfferModel", bindingResult);
+
+            return "redirect:edit";
+        }
+
+        offerService.adOffer(addOfferModel, userDetails);
+
+        return "redirect:all";
+    }
 }
