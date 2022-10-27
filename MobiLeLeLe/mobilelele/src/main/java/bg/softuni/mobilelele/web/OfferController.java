@@ -143,13 +143,15 @@ public class OfferController {
         return "update";
     }
 
-
-    @PostMapping("/edit")
+    @PostMapping("/{id}/edit")
     public String updateOffer(
+            @PathVariable("id") Long id,
             @Valid AddOfferDto addOfferModel,
             BindingResult bindingResult,
             RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal UserDetails userDetails) {
+
+        addOfferModel.setId(id);
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
@@ -158,8 +160,9 @@ public class OfferController {
             return "redirect:edit";
         }
 
-        offerService.adOffer(addOfferModel, userDetails);
+        offerService.editOffer(addOfferModel, userDetails);
 
-        return "redirect:all";
+        return "redirect:/offers/all";
     }
+
 }
